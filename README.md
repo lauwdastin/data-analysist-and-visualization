@@ -1,2 +1,2 @@
-# data-analysist-and-visualization
-Using this repository for analyzing and visualize several data set for educational purposes.
+# data-visualization-analysist-and
+Using this repository for visualize and analyzing several data set for educational purposes.
