@@ -1,0 +1,15 @@
+#Author   : Lauw Dastin Falentino Laurianto
+#Email    : lauwdastin@gmail.com
+#Linkedin : https://www.linkedin.com/in/lauw-dastin-falentino-laurianto
+
+Data Analysis on Global Cases Newly Reported in Last 7 Days
+Total Countries				: 237 Countries
+Global Total Newly Reported Case	: 2,960,714 Cases
+Smallest Newly Total Cases in a Country	: 0 Cases
+Largest Newly Total Cases in a Country	: 706,288 Cases
+Average Newly Total Global Cases	: 12,492 Cases
+
+Standard Deviation	: 53,872.55
+1st Quartile 		: 106
+Median Value		: 695 
+3rd Quartile		: 5,639

@@ -1,0 +1,15 @@
+#Author   : Lauw Dastin Falentino Laurianto
+#Email    : lauwdastin@gmail.com
+#Linkedin : https://www.linkedin.com/in/lauw-dastin-falentino-laurianto
+
+Data Analysis on Global Deaths Cumulative Data
+Total Countries				: 237 Countries
+Global Total Deaths			: 4,831,486 Cases
+Smallest Total Deaths in a Country	: 0 Cases
+Largest Total Deaths in a Country	: 703,599 Cases
+Average Total Global Deaths		: 20,386 Cases
+
+Standard Deviation	: 74,032.82
+1st Quartile 		: 100
+Median Value		: 1,158 
+3rd Quartile		: 8,35

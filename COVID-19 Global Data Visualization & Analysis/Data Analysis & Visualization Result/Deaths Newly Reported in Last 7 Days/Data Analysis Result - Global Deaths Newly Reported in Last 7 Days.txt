@@ -1,0 +1,15 @@
+#Author   : Lauw Dastin Falentino Laurianto
+#Email    : lauwdastin@gmail.com
+#Linkedin : https://www.linkedin.com/in/lauw-dastin-falentino-laurianto
+
+Data Analysis on Global Deaths Newly Reported in Last 7 Days
+Total Countries				: 237 Countries
+Global Total Newly Reported Deaths	: 50,116 Cases
+Smallest Newly Total Deaths in a Country: 0 Cases
+Largest Newly Total Deaths in a Country	: 12,318 Cases
+Average Newly Total Global Deaths	: 212 Cases
+
+Standard Deviation	: 975.3771
+1st Quartile 		: 1
+Median Value		: 12 
+3rd Quartile		: 88
