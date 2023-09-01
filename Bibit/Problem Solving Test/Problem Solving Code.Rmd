@@ -1,0 +1,190 @@
+---
+title: "Problem Solving Test"
+author: "Lauw Dastin Falentino Laurianto"
+date: "2023-08-25"
+output: html_document
+---
+
+```{r}
+#Setup Library
+library(tidyverse)
+```
+
+```{r}
+#Read CSV
+dataset_1 <- read.csv("Stockbit_Bibit_PST_dataset1.csv", header = TRUE)
+dataset_2 <- read.csv("Stockbit_Bibit_PST_dataset2.csv", header = TRUE)
+
+dataset_2  <- dataset_2[order(dataset_2$date, decreasing = TRUE), ]
+unique_dataset_2 <- select(dataset_2, -c("date"))
+unique_dataset_2 <- distinct(unique_dataset_2, user_id, .keep_all = TRUE)
+```
+
+```{r}
+i = 1
+for (x in unique_dataset_2$user_id) {
+    if (is.na(unique_dataset_2$Saham_invested_amount[i]) == FALSE &&
+        is.na(unique_dataset_2$Pasar_Uang_invested_amount[i]) == TRUE &&
+        is.na(unique_dataset_2$Pendapatan_Tetap_invested_amount[i]) == TRUE &&
+            is.na(unique_dataset_2$Campuran_invested_amount[i]) == TRUE) {
+    
+      unique_dataset_2$flag[i] <- "Saham Only"
+      
+    } else if(is.na(unique_dataset_2$Saham_invested_amount[i]) == TRUE &&
+        is.na(unique_dataset_2$Pasar_Uang_invested_amount[i]) == FALSE &&
+        is.na(unique_dataset_2$Pendapatan_Tetap_invested_amount[i]) == TRUE &&
+            is.na(unique_dataset_2$Campuran_invested_amount[i]) == TRUE) {
+      
+      unique_dataset_2$flag[i] <- "Pasar Uang Only"
+      
+    } else if(is.na(unique_dataset_2$Saham_invested_amount[i]) == TRUE &&
+        is.na(unique_dataset_2$Pasar_Uang_invested_amount[i]) == TRUE &&
+        is.na(unique_dataset_2$Pendapatan_Tetap_invested_amount[i]) == FALSE &&
+            is.na(unique_dataset_2$Campuran_invested_amount[i]) == TRUE) {
+      
+      unique_dataset_2$flag[i] <- "Pendapatan Tetap Only"
+      
+    } else if(is.na(unique_dataset_2$Saham_invested_amount[i]) == TRUE &&
+        is.na(unique_dataset_2$Pasar_Uang_invested_amount[i]) == TRUE &&
+        is.na(unique_dataset_2$Pendapatan_Tetap_invested_amount[i]) == TRUE &&
+            is.na(unique_dataset_2$Campuran_invested_amount[i]) == FALSE) {
+      
+      unique_dataset_2$flag[i] <- "Campuran Only"
+      
+    }  else if(is.na(unique_dataset_2$Saham_invested_amount[i]) == FALSE &&
+        is.na(unique_dataset_2$Pasar_Uang_invested_amount[i]) == FALSE &&
+        is.na(unique_dataset_2$Pendapatan_Tetap_invested_amount[i]) == TRUE &&
+            is.na(unique_dataset_2$Campuran_invested_amount[i]) == TRUE) {
+      
+      unique_dataset_2$flag[i] <- "Saham & PU"
+      
+    } else if(is.na(unique_dataset_2$Saham_invested_amount[i]) == FALSE &&
+        is.na(unique_dataset_2$Pasar_Uang_invested_amount[i]) == TRUE &&
+        is.na(unique_dataset_2$Pendapatan_Tetap_invested_amount[i]) == FALSE &&
+            is.na(unique_dataset_2$Campuran_invested_amount[i]) == TRUE) {
+      
+      unique_dataset_2$flag[i] <- "Saham & PT"
+      
+    } else if(is.na(unique_dataset_2$Saham_invested_amount[i]) == FALSE &&
+        is.na(unique_dataset_2$Pasar_Uang_invested_amount[i]) == TRUE &&
+        is.na(unique_dataset_2$Pendapatan_Tetap_invested_amount[i]) == TRUE &&
+            is.na(unique_dataset_2$Campuran_invested_amount[i]) == FALSE) {
+      
+      unique_dataset_2$flag[i] <- "Saham & Campuran"
+      
+    } else if(is.na(unique_dataset_2$Saham_invested_amount[i]) == TRUE &&
+        is.na(unique_dataset_2$Pasar_Uang_invested_amount[i]) == FALSE &&
+        is.na(unique_dataset_2$Pendapatan_Tetap_invested_amount[i]) == FALSE &&
+            is.na(unique_dataset_2$Campuran_invested_amount[i]) == TRUE) {
+      
+      unique_dataset_2$flag[i] <- "PU & PT"
+      
+    } else if(is.na(unique_dataset_2$Saham_invested_amount[i]) == TRUE &&
+        is.na(unique_dataset_2$Pasar_Uang_invested_amount[i]) == FALSE &&
+        is.na(unique_dataset_2$Pendapatan_Tetap_invested_amount[i]) == TRUE &&
+            is.na(unique_dataset_2$Campuran_invested_amount[i]) == FALSE) {
+      
+      unique_dataset_2$flag[i] <- "PU & Campuran"
+      
+    } else if(is.na(unique_dataset_2$Saham_invested_amount[i]) == TRUE &&
+        is.na(unique_dataset_2$Pasar_Uang_invested_amount[i]) == TRUE &&
+        is.na(unique_dataset_2$Pendapatan_Tetap_invested_amount[i]) == FALSE &&
+            is.na(unique_dataset_2$Campuran_invested_amount[i]) == FALSE) {
+      
+      unique_dataset_2$flag[i] <- "PT & Campuran"
+      
+    } else if(is.na(unique_dataset_2$Saham_invested_amount[i]) == FALSE &&
+        is.na(unique_dataset_2$Pasar_Uang_invested_amount[i]) == FALSE &&
+        is.na(unique_dataset_2$Pendapatan_Tetap_invested_amount[i]) == FALSE &&
+            is.na(unique_dataset_2$Campuran_invested_amount[i]) == TRUE) {
+      
+      unique_dataset_2$flag[i] <- "Exclude Campuran"
+      
+    } else if(is.na(unique_dataset_2$Saham_invested_amount[i]) == FALSE &&
+        is.na(unique_dataset_2$Pasar_Uang_invested_amount[i]) == FALSE &&
+        is.na(unique_dataset_2$Pendapatan_Tetap_invested_amount[i]) == TRUE &&
+            is.na(unique_dataset_2$Campuran_invested_amount[i]) == FALSE) {
+      
+      unique_dataset_2$flag[i] <- "Exclude PT"
+      
+    } else if(is.na(unique_dataset_2$Saham_invested_amount[i]) == FALSE &&
+        is.na(unique_dataset_2$Pasar_Uang_invested_amount[i]) == TRUE &&
+        is.na(unique_dataset_2$Pendapatan_Tetap_invested_amount[i]) == FALSE &&
+            is.na(unique_dataset_2$Campuran_invested_amount[i]) == FALSE) {
+      
+      unique_dataset_2$flag[i] <- "Exclude PU"
+      
+    } else if(is.na(unique_dataset_2$Saham_invested_amount[i]) == TRUE &&
+        is.na(unique_dataset_2$Pasar_Uang_invested_amount[i]) == FALSE &&
+        is.na(unique_dataset_2$Pendapatan_Tetap_invested_amount[i]) == FALSE &&
+            is.na(unique_dataset_2$Campuran_invested_amount[i]) == FALSE) {
+      
+      unique_dataset_2$flag[i] <- "Exclude Saham"
+      
+    } else {
+      unique_dataset_2$flag[i] <- "Four of a Kind"
+    }
+  
+  i <- i + 1
+}
+
+count(unique_dataset_2, flag)
+
+full_dataset <- left_join(unique_dataset_2, dataset_1, by = "user_id")
+```
+
+```{r}
+count(subset(full_dataset, flag == "Pasar Uang Only"), user_income_range)
+count(subset(full_dataset, flag == "Pasar Uang Only"), user_age)
+
+count(subset(full_dataset, flag == "Pendapatan Tetap Only"), user_income_range)
+count(subset(full_dataset, flag == "Pendapatan Tetap Only"), user_age)
+
+count(subset(full_dataset, flag == "Saham Only"), user_income_range)
+count(subset(full_dataset, flag == "Saham Only"), user_age)
+
+count(subset(full_dataset, flag == "Campuran Only"), user_income_range)
+count(subset(full_dataset, flag == "Campuran Only"), user_age)
+```
+
+```{r}
+avg_freq <- subset(unique_dataset_2, flag == "Campuran Only")
+avg_freq <- left_join(avg_freq, select(dataset_1, c("user_id", "user_age")))
+count(avg_freq, user_age)
+avg_freq <- left_join(select(avg_freq, c("user_id")), 
+                     select(dataset_2, c("user_id", "date",
+                                         "Campuran_invested_amount")), 
+                     by = "user_id")
+avg_freq  <- avg_freq[order(avg_freq$user_id, decreasing = FALSE), ]
+#PU_Only <- head(PU_Only, 100)
+
+i = 1
+for (x in avg_freq$user_id) {
+  if (i == 1) {
+    avg_freq$flag[i] <- "Buying"
+  } else if ((avg_freq$user_id[i] == avg_freq$user_id[i-1]) == FALSE){
+    avg_freq$flag[i] <- "Buying"
+  } else {
+    transaction <- avg_freq$Campuran_invested_amount[i] - avg_freq$Campuran_invested_amount[i-1] 
+    if (transaction > 0) {
+      avg_freq$flag[i] <- "Buying"
+    } else if (transaction < 0) {
+      avg_freq$flag[i] <- "Selling"
+    } else {
+      avg_freq$flag[i] <- "No Transaction"
+    }
+  }
+  i <- i + 1
+}
+
+count(avg_freq, flag)
+distinct(avg_freq, user_id)
+```
+
+```{r}
+sum(unique_dataset_2$Saham_AUM, na.rm = TRUE)
+sum(unique_dataset_2$Pasar_Uang_AUM, na.rm = TRUE)
+sum(unique_dataset_2$Pendapatan_Tetap_AUM, na.rm = TRUE)
+sum(unique_dataset_2$Campuran_AUM, na.rm = TRUE)
+```
+
